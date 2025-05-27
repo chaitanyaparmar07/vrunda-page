@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Vrunda, From Chaitanya</title>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe6e6, #ffe0f0);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .container {
+      position: relative;
+      width: 320px;
+      height: 220px;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    .envelope-body {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #fefefe;
+      border: 2px solid #d9a7c7;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 1;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #ffb3c6, #ffccd9);
+      clip-path: polygon(0 0, 50% 50%, 100% 0);
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .letter {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      background-size: cover;
+      font-family: 'Indie Flower', cursive;
+      color: #333;
+      padding: 20px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(0);
+      transition: transform 1s ease, opacity 1s ease;
+    }
+
+    .open .flap {
+      transform: rotateX(-180deg);
+    }
+
+    .show-letter .letter {
+      opacity: 1;
+      transform: translateY(-230px);
+    }
+
+    .letter-content > * {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .letter h2 {
+      color: #e60073;
+      text-align: center;
+    }
+
+    .heart {
+      font-size: 2em;
+      color: red;
+      animation: beat 1s infinite;
+      text-align: center;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-style: italic;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" onclick="openEnvelope(this)">
+  <div class="flap"></div>
+  <div class="envelope-body"></div>
+  <div class="letter">
+    <div class="letter-content">
+      <h2>Vrunda, Tum Bahut Special Ho</h2>
+      <div class="heart">❤️</div>
+      <p>
+        Shayad har koi tumhari muskurahat ki ahmiyat nahi samajh paaye,<br>
+        lekin mere liye tumhari ek smile duniya ki sabse pyaari cheez hai.
+      </p>
+      <p>
+        Tumhari baatein, tumhara andaaz, tumhara hona – sab kuch alag hai.<br>
+        Tum jaise ho, waise hi perfect ho.<br>
+        Aur mujhe khushi hoti hai tumhein jaankar, tumse baat karke.
+      </p>
+      <p>
+        Agar kabhi udaas mehsoos karo, toh yaad rakhna –<br>
+        tumhara ek silent supporter hamesha tumhare saath hai.
+      </p>
+      <div class="footer">
+        With all my warmth and respect, <br> — Chaitanya
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openEnvelope(el) {
+    if (el.classList.contains("open")) return; // prevent retrigger
+
+    el.classList.add("open");
+
+    setTimeout(() => {
+      el.classList.add("show-letter");
+
+      const lines = el.querySelectorAll(".letter-content > *");
+      lines.forEach((line, i) => {
+        setTimeout(() => {
+          line.style.opacity = "1";
+        }, 500 * i);
+      });
+
+    }, 1000); // wait for flap to open
+  }
+</script>
+
+</body>
+</html>
